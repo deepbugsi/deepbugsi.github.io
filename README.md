@@ -1,14 +1,6 @@
 # blog
-My blog made with [jekyll](http://jekyllrb.com) and hosted with Github Pages.
-
-
-### Install
-
-* fork this repository
-* edit the `_config.yml` with your info
-* change the links in `_data/navigation.yml`
-* remove my posts from `_posts/`
-* rename your repo to ***your-username*.github.io**
+Deep::Blog is a blog about programming. Mainly written for sharing author's programming experiences in Sinhala.
 
 ### License
-All this stuff is under the [MIT License](https://raw.githubusercontent.com/getmicah/getmicah.github.io/master/LICENSE)
+
+This blog uses a theme created my Micah Cowell, And this theme is licensed under the [MIT License](https://raw.githubusercontent.com/getmicah/getmicah.github.io/master/THEME_LICENSE)
