@@ -3,8 +3,9 @@ permalink: /blog/:title
 
 
 # My variables
-name: Micah Cowell
-description: Futuristic web design
+name: Deep::Blog
+author_name: deepbug
+description: my notes on programming and computer science...
 google_verification: null
 
 
