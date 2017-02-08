@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    
+        <title>Debian (Jessie) සඳහා Brackets install කිරීම</title>
+    
+
+    <meta name="description" content="my notes on programming and computer science...">
+
+    
+
+    <link rel="icon" href="/assets/img/favicon.png">
+    <link rel="stylesheet"
+href="https://fonts.googleapis.com/css?family=Inconsolata:400,700">
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="post">
+	<div class="post__back">
+    	<a href="/">&lt;&lt;&lt; මුල් පිටුවට</a>
+    </div>
+    <div class="post__title">
+    	<h1>Debian (Jessie) සඳහා Brackets install කිරීම</h1>
+    </div>
+    <div class="post__date">
+    	<p>February 3, 2017</p>
+    </div>
+    <div class="post__meta">
+    	<p></p>
+    </div>
+    <div class="post__content"?>
+        <p><a href="http://brackets.io/">brackets</a> කියන්නෙ web designing/development කරනවා නම් ගොඩක් ප්‍රයෝජනවත් වෙන text editor එකක්. කොහොමවුනත් Debian Jessie, Ubuntu Vivid Vervet වගේ අලුත් OS  වලට brackets සාමාන්‍ය ක්‍රමයට install කරගන්න බෑ. මොකද brackets වල dependency එකක් විදිහට තියෙන <code class="highlighter-rouge">libgcrypt11</code> කියන library එක Debian Jessie වල නැති නිසා, ඒ වෙනුවට තියෙන්නෙ <code class="highlighter-rouge">libgcrypt20</code> කියන අලුත් library එක. මේ නිසා අපිට brackets site එකෙන් download කරන <code class="highlighter-rouge">.deb</code> file එක පාවිච්චි කරලා brackets install කරන්න බෑ.</p>
+
+<p>කොහොම වුණත්, ඒ <code class="highlighter-rouge">.deb</code> file එකම පොඩ්ඩක් වෙනස් කරලා අපිට මේ අවුල හදාගන්න පුළුවන්. මේ තියෙන්නෙ මම මේක හදාගත්ත හැටි. මේ වැඩේ මම කලේ Debian 8 (Jessie) OS එකක. Ubuntu වල මම මේක test කලේ නෑ. ඒ නිසා විශ්වාසයක් නැතිනම් මේ වැඩේ Ubuntu (හෝ Debian 8 නොවෙන) OS එකක කරන්න යන්න එපා.</p>
+
+<p><strong>පියවර 1</strong>, මුලින්ම අපි අවශ්‍ය කරන packages download කරගන්න ඕනෙ.</p>
+
+<ul>
+  <li>
+    <p><a href="http://brackets.io/">brackets</a> වෙබ් අඩවියෙන් අවශ්‍ය කරන <code class="highlighter-rouge">Brackets.Release.1.8.64-bit.deb</code> package එක download කරගන්න.<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup></p>
+  </li>
+  <li>
+    <p><a href="https://packages.debian.org/wheezy/libgcrypt11">libgcrypt11</a> debian package එක download කරගන්න. පහල තියෙන direct links වලින් amd64 (64bit), i386 (32bit) packages දෙක download කරගන්න පුළුවන්</p>
+
+    <ul>
+      <li><a href="http://security.debian.org/debian-security/pool/updates/main/libg/libgcrypt11/libgcrypt11_1.5.0-5+deb7u5_i386.deb">i386</a></li>
+      <li><a href="http://security.debian.org/debian-security/pool/updates/main/libg/libgcrypt11/libgcrypt11_1.5.0-5+deb7u5_amd64.deb">amd64</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>පියවර 2</strong>, ඊලඟට මේ <code class="highlighter-rouge">Brackets.Release.1.8.64-bit.deb</code> file එක extract කරගන්න අවශ්‍යයයි. මොකද අපිට මෙතැනදි <code class="highlighter-rouge">libgcrypt11</code> කියන dependency එක මේකෙන් අයින් කරන්න වෙනවා.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>dpkg-deb --raw-extract Brackets.Release.1.8.64-bit.deb Brackets
+</code></pre>
+</div>
+
+<p><strong>පියවර 3</strong>, දැන් මේ package එකෙන් <code class="highlighter-rouge">libgcrypt11</code> කියන dependency එක package එකෙන් අයින් කරන්න ඕනෙ.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>sed -i <span class="s1">'s/ libgcrypt11 (&gt;= [0-9.]*),//'</span> ./Brackets/DEBIAN/control
+</code></pre>
+</div>
+
+<p><strong>පියවර 4</strong>, ඊලඟට <code class="highlighter-rouge">libgcrypt11</code> package එක extract කරගන්න.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>dpkg-deg --raw-extract libgcrypt11_1.5.0-5+deb7u5_amd64.deb libgcrypt11
+</code></pre>
+</div>
+
+<p><strong>පියවර 5</strong>, දැන් මේ library එක brackets package එකට copy කරන්න ඕනෙ.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>cp -v libgcrypt11/lib/<span class="k">*</span>-linux-gnu/libgcrypt.so.11<span class="k">*</span> Brackets/opt/brackets/
+</code></pre>
+</div>
+
+<p><strong>පියවර 6</strong>, දැන් මේ Brackets කියන directory එක<sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup> <code class="highlighter-rouge">.deb</code> package එකක් බවට හරවන්න ඕනෙ.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>dpkg-deb --build Brackets brackets.deb
+</code></pre>
+</div>
+
+<p>දැන් අපිට මේ <code class="highlighter-rouge">brackets.deb</code> කියන package එක පාවිච්චි කරලා brackets install කරගන්න පුළුවන්</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>dpkg -i bracket.deb
+</code></pre>
+</div>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p>package එකේ නම වෙනස් වෙන්න පුළුවන්&nbsp;<a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:2">
+      <p>අපි <code class="highlighter-rouge">Brackets.Release.1.8.64-bit.deb</code> package එක extract කරපු directory එක.&nbsp;<a href="#fnref:2" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+    </div>
+</div>
+
+    </div>
+
+</body>
+
+</html>

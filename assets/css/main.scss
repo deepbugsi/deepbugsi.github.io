@@ -3,12 +3,13 @@
 
 @import "reset";
 @import "config";
+@import "fonts";
 
 body {
 	color: $color-black;
-	background: $color-white;
-	font-family: 'Inconsolata', ;
-	font-size: 100%;
+	background: $color-black;
+	font-family: 'AbhayaLibre', serif;
+	font-size: 20px;
 	font-weight: 400;
 }
 h1 {
@@ -55,13 +56,26 @@ blockquote {
   font-style: italic;
 }
 
+.logo {
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+	border-bottom: 2px solid #000;
+
+	img {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+
 .wrapper {
-	max-width: 600px;
+	max-width: 700px;
 	margin: auto;
-	padding: 60px 30px 60px 30px;
+	padding: 30px 30px 60px 30px;
 	@media screen and (max-width: $br) {
 		padding: 20px;
 	}
+	background-color: $color-white;
 }
 
 
@@ -111,7 +125,7 @@ blockquote {
 	padding-bottom: 30px;
 	&__back {
 		a {
-			
+
 		}
 	}
 	&__title {
@@ -159,8 +173,8 @@ blockquote {
 			margin-bottom: 15px;
 		}
 		a {
-			padding-bottom: 1px;
-			border-bottom: 1px solid $color-link;
+			// padding-bottom: 1px;
+			// border-bottom: 1px solid $color-link;
 			&:hover {
 				background-color: $color-grey;
 				text-decoration: none;
@@ -197,9 +211,14 @@ blockquote {
 				margin: auto;
 			}
 		}
+		pre {
+			word-wrap: normal;
+			white-space: pre-wrap;
+		}
 		code {
+			font-family: 'Inconsolata';
 			padding: 3px;
-			font-size: 0.9em;
+			font-size: 0.8em;
 			border-radius: 3px;
 			background: $color-grey;
 		}
@@ -219,6 +238,11 @@ blockquote {
 			margin: 15px;
 			border: 0;
 			border-bottom: 1px dashed $color-black;
+		}
+		.footnotes {
+			border-top: 1px solid #999;
+			padding-top: 5px;
+			font-size: 15px;
 		}
 	}
 }
